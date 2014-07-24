@@ -1,66 +1,35 @@
-## Put comments here that give an overall description of what your
-## functions do
-
 ## Function creating cache matrix (CM)
 ## set(y) - set matrix to y
-## get - gives matrix
-## setInverse - calculates inverse of x
+## get - gives matrix 
+## setInverse(y) - sets y as an inverse of x
 ## getInverse - gives inverse of x
 
 makeCacheMatrix <- function(x = matrix()) {
-        m <- NULL
+        m <- NULL #by default matrix is empty (NULL)
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                m <<- NULL #by default inverse matrix is empty (NULL)
         }
-        get <- function() x
+        get <- function() x #function that returns x
         setInverse <- function(inverse) m <<- inverse
-        getInverse <- function() m
+        getInverse <- function() m #function that returns inverse of x
         list(set = set, get = get,
              setInverse = setInverse,
              getInverse = getInverse)
 }
 
-# makeVector <- function(x = numeric()) {
-#         m <- NULL
-#         set <- function(y) {
-#                 x <<- y
-#                 m <<- NULL
-#         }
-#         get <- function() x
-#         setmean <- function(mean) m <<- mean
-#         getmean <- function() m
-#         list(set = set, get = get,
-#              setmean = setmean,
-#              getmean = getmean)
-# }
-
-
-## Write a short comment describing this function
-
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-        m <- x$getInverse()
-        if(!is.null(m)){
+        m <- x$getInverse() 
+        #checks whether inverse matrix has been already calculated
+        #if yes, returns the matrix
+        if(!is.null(m)){ 
                 message("getting cached data")
                 return(m)
         }
+        #if no, calculates the inverse matrix
         mat <- x$get()
-        m <- solve(mat)
+        m <- solve(mat) #calculates the inverse matrix
         x$setInverse(m)
         return(m)
 }
-
-
-
-# cachemean <- function(x, ...) {
-#         m <- x$getmean()
-#         if(!is.null(m)) {
-#                 message("getting cached data")
-#                 return(m)
-#         }
-#         data <- x$get()
-#         m <- mean(data, ...)
-#         x$setmean(m)
-#         m
-# }
